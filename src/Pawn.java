@@ -1,6 +1,6 @@
 /*
- * Name:
- * Section Leader:
+ * Name: Faisal Richard D. Tamano Jr.
+ * Section: EQ3
  * File: Pawn.java
  * ------------------
  * This class represents the Pawn type of chess piece. This piece can move only straight 

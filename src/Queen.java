@@ -1,6 +1,6 @@
 /*
- * Name:
- * Section Leader:
+ * Name: Faisal Richard D. Tamano Jr.
+ * Section: EQ3
  * File: Queen.java
  * ------------------
  * This class represents the Queen type of chess piece. This piece can move and capture

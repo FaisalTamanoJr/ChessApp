@@ -1,6 +1,6 @@
 /*
- * Name:
- * Section Leader:
+ * Name: Faisal Richard D. Tamano Jr.
+ * Section: EQ3
  * File: Bishop.java
  * ------------------
  * This class represents the Bishop type of chess piece. This piece can move and capture 

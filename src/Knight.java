@@ -1,6 +1,6 @@
 /*
- * Name:
- * Section Leader:
+ * Name: Faisal Richard D. Tamano Jr.
+ * Section: EQ3
  * File: Knight.java
  * ------------------
  * This class represents the Knight type of chess piece. This piece can move only in 
