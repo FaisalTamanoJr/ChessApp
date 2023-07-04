@@ -113,18 +113,20 @@ public class Chess extends GraphicsProgram{
 		ChessPiece clickedPiece = board.pieceAt(clickedLocation[0],clickedLocation[1]);
 		if (firstClick){
 
-			/* If(they click on a piece of their own color) */
-			if (clickedPiece.getColor() == chessTurn){
+			if (clickedPiece != null) {
+				/* If(they click on a piece of their own color) */
+				if (clickedPiece.getColor() == chessTurn) {
 
-				// Highlight spot where the player clicked with selectSquare
-				display.selectSquare(clickedPiece.getRow(),
-						clickedPiece.getCol(), Color.GREEN);
+					// Highlight spot where the player clicked with selectSquare
+					display.selectSquare(clickedPiece.getRow(),
+							clickedPiece.getCol(), Color.GREEN);
 
-				// Store the piece at the location the user clicked so you
-				// can move it on the next click
-				selectedPiece = clickedPiece;
-				this.firstClick = false;
-				display.draw(board);
+					// Store the piece at the location the user clicked so you
+					// can move it on the next click
+					selectedPiece = clickedPiece;
+					this.firstClick = false;
+					display.draw(board);
+				}
 			}
 		}else{
 			/*
@@ -138,40 +140,46 @@ public class Chess extends GraphicsProgram{
 			 * If(the chosen piece can move to the selected spot AND the
 			 * selected spot is not the spot the piece already occupies)
 			 */
-			if ((allowedMove) & ((clickedLocation[0] != selectedPiece.getRow()) & (clickedLocation[1] !=
-					selectedPiece.getCol()))){
+			if (clickedPiece != null){
+				if ((allowedMove) & ((clickedLocation[0] != selectedPiece.getRow()) & (clickedLocation[1] !=
+						selectedPiece.getCol()))) {
 
-				// Remove the piece from the board
-				board.removePiece(clickedPiece.getRow(),clickedPiece.getCol());
+					// Remove the piece from the board
+					board.removePiece(clickedPiece.getRow(), clickedPiece.getCol());
 
-				// Update the ChessPiece’s location
-				selectedPiece.moveTo(clickedPiece.getRow(), selectedPiece.getCol());
+					// Update the ChessPiece’s location
+					selectedPiece.moveTo(clickedPiece.getRow(), selectedPiece.getCol());
 
-				// Add the updated ChessPiece back to the board addPiece
-				board.addPiece(selectedPiece);
+					// Add the updated ChessPiece back to the board addPiece
+					board.addPiece(selectedPiece);
 
-				// Clear all highlighted squares
-				display.unselectAll();
+					// Clear all highlighted squares
+					display.unselectAll();
 
-				display.draw(board);
+					display.draw(board);
 
-				// Check for Checkmates or Stalemates with isInCheckmate
-				// or isinStalemate and print appropriate message
-				if (isInCheck(board, chessTurn)){
-					if (chessTurn == ChessPiece.WHITE){
-						print("Black is in check");
-					}else{
-						print("White is in check");
+					// Check for Checkmates or Stalemates with isInCheckmate
+					// or isinStalemate and print appropriate message
+					if (isInCheck(board, chessTurn)) {
+						if (chessTurn == ChessPiece.WHITE) {
+							print("Black is in check");
+						} else {
+							print("White is in check");
+						}
+					} else if (isInStalemate(board, chessTurn)) {
+						print("Stalemate. Game Over");
 					}
-				}else if (isInStalemate(board, chessTurn)){
-					print("Stalemate. Game Over");
-				}
 
-				// Advance to next player’s turn
-				if (chessTurn == ChessPiece.WHITE){
-					this.chessTurn = ChessPiece.BLACK;
+					// Advance to next player’s turn
+					if (chessTurn == ChessPiece.WHITE) {
+						this.chessTurn = ChessPiece.BLACK;
+					} else {
+						this.chessTurn = ChessPiece.WHITE;
+					}
 				}else{
-					this.chessTurn = ChessPiece.WHITE;
+					// Clear all highlighted squares
+					display.unselectAll();
+					display.draw(board);
 				}
 			}else{
 				// Clear all highlighted squares
