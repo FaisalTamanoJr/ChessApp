@@ -1,16 +1,8 @@
-/*
- * Name: Faisal Tamano Jr.
- * Section: EQ3
- * File: Chess.java
- * ------------------
- * This program plays the game Chess.
- */
-
 import java.awt.Color;
 import java.awt.event.*;
 
 /** The main class responsible for managing the chess game */
-public class Chess extends GraphicsProgram{
+public class Chess extends GraphicsProgram {
 
 	/** Object responsible for handling the graphical display on the screen */
 	ChessDisplay display;
@@ -46,10 +38,20 @@ public class Chess extends GraphicsProgram{
 	public void run()
 	{
 		// You fill this in.
-		startGame(); // Arrange to match the starting configuration
+		//startGame(); // Arrange to match the starting configuration
+		custom();
 		this.chessTurn = ChessPiece.WHITE; // Player white is the first player
 		this.firstClick = true;
 		display.draw(board);
+	}
+
+	private void custom(){
+		Knight blackKnightL = new Knight(0, 1, ChessPiece.BLACK);
+		Knight whiteKnightL = new Knight(7, 1, ChessPiece.WHITE);
+		board.addPiece(blackKnightL);
+		board.addPiece(whiteKnightL);
+		board.addPiece(new Pawn(6,3, ChessPiece.WHITE));
+		board.addPiece(new Pawn(5,0, ChessPiece.BLACK));
 	}
 
 	/** The method that arranges the piece to the starting positions*/
@@ -71,14 +73,14 @@ public class Chess extends GraphicsProgram{
 		board.addPiece(blackBishopR);
 		board.addPiece(blackKnightR);
 		board.addPiece(blackRookR);
-		board.addPiece(new Pawn(1,0,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,1,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,2,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,3,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,4,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,5,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,6,ChessPiece.BLACK));
-		board.addPiece(new Pawn(1,7,ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,0, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,1, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,2, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,3, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,4, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,5, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,6, ChessPiece.BLACK));
+		board.addPiece(new Pawn(1,7, ChessPiece.BLACK));
 
 		// Add the white pieces
 		Rook whiteRookL = new Rook(7, 0, ChessPiece.WHITE);
@@ -97,14 +99,14 @@ public class Chess extends GraphicsProgram{
 		board.addPiece(whiteBishopR);
 		board.addPiece(whiteKnightR);
 		board.addPiece(whiteRookR);
-		board.addPiece(new Pawn(6,0,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,1,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,2,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,3,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,4,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,5,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,6,ChessPiece.WHITE));
-		board.addPiece(new Pawn(6,7,ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,0, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,1, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,2, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,3, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,4, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,5, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,6, ChessPiece.WHITE));
+		board.addPiece(new Pawn(6,7, ChessPiece.WHITE));
 	}
 
 	public void mousePressed(MouseEvent e){
@@ -121,9 +123,9 @@ public class Chess extends GraphicsProgram{
 					display.selectSquare(clickedPiece.getRow(),
 							clickedPiece.getCol(), Color.GREEN);
 
-					// Store the piece at the location the user clicked so you
+					// Store the piece at the location the user clicked, so you
 					// can move it on the next click
-					selectedPiece = clickedPiece;
+					this.selectedPiece = clickedPiece;
 					this.firstClick = false;
 					display.draw(board);
 				}
@@ -133,53 +135,46 @@ public class Chess extends GraphicsProgram{
 			 * Check to see if the piece selected on the previous click
 			 * can move to the spot selected on this click with the
 			 * canMoveTo method.
-           	 */
+			 */
 			boolean allowedMove = selectedPiece.canMoveTo(clickedLocation[0],clickedLocation[1],board);
 
 			/*
 			 * If(the chosen piece can move to the selected spot AND the
 			 * selected spot is not the spot the piece already occupies)
 			 */
-			if (clickedPiece != null){
-				if ((allowedMove) & ((clickedLocation[0] != selectedPiece.getRow()) & (clickedLocation[1] !=
-						selectedPiece.getCol()))) {
+			if ((allowedMove) & !((clickedLocation[0] == selectedPiece.getRow()) & (clickedLocation[1] == selectedPiece.getCol()))){
 
-					// Remove the piece from the board
-					board.removePiece(clickedPiece.getRow(), clickedPiece.getCol());
+				// Remove the piece from the board
+				board.removePiece(selectedPiece.getRow(), selectedPiece.getCol());
 
-					// Update the ChessPiece’s location
-					selectedPiece.moveTo(clickedPiece.getRow(), selectedPiece.getCol());
+				// Update the ChessPiece’s location
+				selectedPiece.moveTo(clickedLocation[0], clickedLocation[1]);
 
-					// Add the updated ChessPiece back to the board addPiece
-					board.addPiece(selectedPiece);
+				// Add the updated ChessPiece back to the board addPiece
+				board.addPiece(selectedPiece);
 
-					// Clear all highlighted squares
-					display.unselectAll();
+				// Clear all highlighted squares
+				display.unselectAll();
 
-					display.draw(board);
+				display.draw(board);
 
-					// Check for Checkmates or Stalemates with isInCheckmate
-					// or isinStalemate and print appropriate message
-					if (isInCheck(board, chessTurn)) {
-						if (chessTurn == ChessPiece.WHITE) {
-							print("Black is in check");
-						} else {
-							print("White is in check");
-						}
-					} else if (isInStalemate(board, chessTurn)) {
-						print("Stalemate. Game Over");
-					}
-
-					// Advance to next player’s turn
+				// Check for Checkmates or Stalemates with isInCheckmate
+				// or isInStalemate and print appropriate message
+				if (isInCheck(board, chessTurn)) {
 					if (chessTurn == ChessPiece.WHITE) {
-						this.chessTurn = ChessPiece.BLACK;
+						println("Black is in check");
 					} else {
-						this.chessTurn = ChessPiece.WHITE;
+						println("White is in check");
 					}
-				}else{
-					// Clear all highlighted squares
-					display.unselectAll();
-					display.draw(board);
+				} else if (isInStalemate(board, chessTurn)) {
+					println("Stalemate. Game Over");
+				}
+
+				// Advance to next player’s turn
+				if (chessTurn == ChessPiece.WHITE) {
+					this.chessTurn = ChessPiece.BLACK;
+				} else {
+					this.chessTurn = ChessPiece.WHITE;
 				}
 			}else{
 				// Clear all highlighted squares

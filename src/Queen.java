@@ -1,14 +1,4 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: Queen.java
- * ------------------
- * This class represents the Queen type of chess piece. This piece can move and capture
- * in any straight line (diagonally, horizontally, or vertically). For more information go 
- * here: http://en.wikipedia.org/wiki/Queen_(chess)
- */
-
-public class Queen extends ChessPiece{
+public class Queen extends ChessPiece {
 
 	/** Constructor for the Queen class */
 	public Queen(int initialRow, int initialCol, int pieceColor)

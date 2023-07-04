@@ -1,14 +1,4 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: Rook.java
- * ------------------
- * This class represents the Rook type of chess piece. This piece can move and capture 
- * pieces along rows and columns. It is also known as a castle. For more information visit: 
- * http://en.wikipedia.org/wiki/Rook_(chess)
- */
-
-public class Rook extends ChessPiece{
+public class Rook extends ChessPiece {
 
 	/** Constructor for the Rook class */
 	public Rook(int initialRow, int initialCol, int pieceColor)

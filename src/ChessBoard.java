@@ -1,19 +1,6 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: ChessBoard.java
- * ------------------
- * This class represents the ChessBoard. Its job is to keep track of where all
- * of the pieces are. Since we just learned about two-dimensional arrays, it 
- * might be a good idea to use one here (just a hint). Currently, it doesn't do 
- * anything, but it does have four methods for you to fill in. These are the only
- * required methods in this class. As long as these work, feel free to do whatever
- * else you want to get this class working.
- */
-
 import java.lang.reflect.Array;
 
-public class ChessBoard extends DrawableObject{
+public class ChessBoard extends DrawableObject {
 
 	/** Constant that sets the size of the chess board */
 	public static final int BOARD_SIZE = 8;

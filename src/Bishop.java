@@ -1,13 +1,4 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: Bishop.java
- * ------------------
- * This class represents the Bishop type of chess piece. This piece can move and capture 
- * pieces along diagonals. For more information visit: http://en.wikipedia.org/wiki/Bishop_(chess)
- */
-
-public class Bishop extends ChessPiece{
+public class Bishop extends ChessPiece {
 
 	/** Constructor for the Bishop class */
 	public Bishop(int initialRow, int initialCol, int pieceColor)

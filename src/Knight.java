@@ -1,15 +1,4 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: Knight.java
- * ------------------
- * This class represents the Knight type of chess piece. This piece can move only in 
- * L-shapes. That is it moves two spaces in one direction and one space in an orthogonal
- * direction. It is the only piece in chess that can jump over other pieces. For
- * more information go here: http://en.wikipedia.org/wiki/Knight_(chess)
- */
-
-public class Knight extends ChessPiece{
+public class Knight extends ChessPiece {
 
 	/** Constructor for the Knight class */
 	public Knight(int initialRow, int initialCol, int pieceColor)
@@ -24,8 +13,47 @@ public class Knight extends ChessPiece{
 	 */
 	public boolean canMoveTo(int nextRow, int nextCol, ChessBoard board)
 	{
-		// Fill this in with your own code.
-		return automagicKnightCanMoveTo(nextRow, nextCol, board);	// Eventually this line should not be here
+		// If the space at (row,col) is two spaces in one direction and
+		// one space in the other direction from (this.row, this.col)
+		if ((nextRow == row+2) || (nextRow == row-2)){
+			if ((nextCol == col+1) || (nextCol == col-1)){
+				if (board.pieceAt(nextRow, nextCol) != null) {
+					// If the space at (row,col) is occupied by a piece with the
+					// same color as this.color
+					if (board.pieceAt(nextRow, nextCol).getColor() == board.pieceAt(row, col).getColor()) {
+						return false;
+					}
+				}
+				// Check to see whether or not this move would cause the
+				// player to move him/herself into check using
+				// moveWouldCauseCheck
+				if (moveWouldCauseCheck(nextRow, nextCol, board)){
+					return false;
+				}
+				return true;
+			}
+			return false;
+		}
+		else if ((nextRow == row+1) || (nextRow == row-1)){
+			if ((nextCol == col+2) || (nextCol == col-2)){
+				if (board.pieceAt(nextRow, nextCol) != null) {
+					// If the space at (row,col) is occupied by a piece with the
+					// same color as this.color
+					if (board.pieceAt(nextRow, nextCol).getColor() == board.pieceAt(row, col).getColor()) {
+						return false;
+					}
+				}
+				// Check to see whether or not this move would cause the
+				// player to move him/herself into check using
+				// moveWouldCauseCheck
+				else if (moveWouldCauseCheck(nextRow, nextCol, board)){
+					return false;
+				}
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 	
 	/** Implementation of getType() method for the Knight class. Provides a way to identify

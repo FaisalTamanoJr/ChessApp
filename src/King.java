@@ -1,14 +1,4 @@
-/*
- * Name: Faisal Richard D. Tamano Jr.
- * Section: EQ3
- * File: King.java
- * ------------------
- * This class represents the King type of chess piece. This piece can move (and capture) one 
- * space in any direction. If you lose it, you lose the game. For more information go here: 
- * http://en.wikipedia.org/wiki/King_(chess)
- */
-
-public class King extends ChessPiece{
+public class King extends ChessPiece {
 	
 	/** Constructor for the King class */
 	public King(int initialRow, int initialCol, int pieceColor)
