@@ -21,8 +21,10 @@ public class Chess extends GraphicsProgram{
 	/** Object used to tell which player's turn is it*/
 	int chessTurn;
 
+	/** Object used to tell if it is the first click during the turn or not*/
 	boolean firstClick;
 
+	/** Selected piece after the first click */
 	ChessPiece selectedPiece;
 
 	/** Method called before run responsible for initializing the ChessDisplay and 
