@@ -18,13 +18,19 @@ public class Chess extends GraphicsProgram{
 	/** Object that keeps track of the locations of all pieces */
 	ChessBoard board;
 
+	/** Object used to tell which player's turn is it*/
+	int chessTurn;
+
+	boolean firstClick;
+
+	ChessPiece selectedPiece;
+
 	/** Method called before run responsible for initializing the ChessDisplay and 
 	 *  ChessBoard objects */
 	public void init()
 	{
 		display = ChessDisplay.getInstance(this);			// This line is required, don't change it
 		board = new ChessBoard();
-		startGame();
 
 		display.useRealChessLabels(false);			// Use this method to change how the board is labeled
 															// on the screen. Passing in true will label the board
@@ -37,6 +43,9 @@ public class Chess extends GraphicsProgram{
 	public void run()
 	{
 		// You fill this in.
+		startGame(); // Arrange to match the starting configuration
+		this.chessTurn = ChessPiece.WHITE; // Player white is the first player
+		this.firstClick = true;
 		display.draw(board);
 	}
 
@@ -94,5 +103,79 @@ public class Chess extends GraphicsProgram{
 		board.addPiece(new Pawn(6,6,ChessPiece.WHITE));
 		board.addPiece(new Pawn(6,7,ChessPiece.WHITE));
 	}
-}
 
+	public void mousePressed(MouseEvent e){
+		/* Translate mouse click location to chess board location  */
+		int[] clickedLocation = display.getLocation(e.getX(), e.getY());
+		ChessPiece clickedPiece = board.pieceAt(clickedLocation[0],clickedLocation[1]);
+		if (firstClick){
+
+			/* If(they click on a piece of their own color) */
+			if (clickedPiece.getColor() == chessTurn){
+
+				// Highlight spot where the player clicked with selectSquare
+				display.selectSquare(clickedPiece.getRow(),
+						clickedPiece.getCol(), Color.GREEN);
+
+				// Store the piece at the location the user clicked so you
+				// can move it on the next click
+				selectedPiece = clickedPiece;
+				this.firstClick = false;
+				display.draw(board);
+			}
+		}else{
+			/*
+			 * Check to see if the piece selected on the previous click
+			 * can move to the spot selected on this click with the
+			 * canMoveTo method.
+           	 */
+			boolean allowedMove = selectedPiece.canMoveTo(clickedLocation[0],clickedLocation[1],board);
+
+			/*
+			 * If(the chosen piece can move to the selected spot AND the
+			 * selected spot is not the spot the piece already occupies)
+			 */
+			if ((allowedMove) & ((clickedPiece.getRow() != selectedPiece.getRow()) & (clickedPiece.getCol() !=
+					selectedPiece.getCol()))){
+
+				// Remove the piece from the board
+				board.removePiece(clickedPiece.getRow(),clickedPiece.getCol());
+
+				// Update the ChessPiece’s location
+				selectedPiece.moveTo(clickedPiece.getRow(), selectedPiece.getCol());
+
+				// Add the updated ChessPiece back to the board addPiece
+				board.addPiece(selectedPiece);
+
+				// Clear all highlighted squares
+				display.unselectAll();
+
+				display.draw(board);
+
+				// Check for Checkmates or Stalemates with isInCheckmate
+				// or isinStalemate and print appropriate message
+				if (isInCheck(board, chessTurn)){
+					if (chessTurn == ChessPiece.WHITE){
+						print("Black is in check");
+					}else{
+						print("White is in check");
+					}
+				}else if (isInStalemate(board, chessTurn)){
+					print("Stalemate. Game Over");
+				}
+
+				// Advance to next player’s turn
+				if (chessTurn == ChessPiece.WHITE){
+					this.chessTurn = ChessPiece.BLACK;
+				}else{
+					this.chessTurn = ChessPiece.WHITE;
+				}
+			}else{
+				// Clear all highlighted squares
+				display.unselectAll();
+				display.draw(board);
+			}
+			this.firstClick = true;
+		}
+	}
+}
