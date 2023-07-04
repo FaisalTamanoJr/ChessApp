@@ -46,12 +46,12 @@ public class Chess extends GraphicsProgram {
 	}
 
 	private void custom(){
-		Knight blackKnightL = new Knight(0, 1, ChessPiece.BLACK);
-		Knight whiteKnightL = new Knight(7, 1, ChessPiece.WHITE);
-		board.addPiece(blackKnightL);
-		board.addPiece(whiteKnightL);
-		board.addPiece(new Pawn(6,3, ChessPiece.WHITE));
-		board.addPiece(new Pawn(5,0, ChessPiece.BLACK));
+		Bishop a = new Bishop(0, 1, ChessPiece.BLACK);
+		Bishop b = new Bishop(7, 1, ChessPiece.WHITE);
+		board.addPiece(a);
+		board.addPiece(b);
+		board.addPiece(new Queen(5,3, ChessPiece.WHITE));
+		board.addPiece(new Queen(5,0, ChessPiece.BLACK));
 	}
 
 	/** The method that arranges the piece to the starting positions*/

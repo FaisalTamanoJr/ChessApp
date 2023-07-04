@@ -12,9 +12,9 @@ public class King extends ChessPiece {
 	 *  to the specified location (you need to fill this one in).
 	 */
 	public boolean canMoveTo(int nextRow, int nextCol, ChessBoard board)
-	{	
-		// Fill this in with your own code.
-		return automagicKingCanMoveTo(nextRow, nextCol, board);	// Eventually this line should not be here
+	{
+
+		return true;
 	}
 	
 	/** Implementation of getType() method for the King class. Provides a way to identify
