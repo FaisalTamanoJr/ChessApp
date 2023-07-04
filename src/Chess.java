@@ -32,6 +32,7 @@ public class Chess extends GraphicsProgram{
 	public void init()
 	{
 		display = ChessDisplay.getInstance(this);			// This line is required, don't change it
+		display.addMouseListener(this);
 		board = new ChessBoard();
 
 		display.useRealChessLabels(false);			// Use this method to change how the board is labeled
@@ -137,7 +138,7 @@ public class Chess extends GraphicsProgram{
 			 * If(the chosen piece can move to the selected spot AND the
 			 * selected spot is not the spot the piece already occupies)
 			 */
-			if ((allowedMove) & ((clickedPiece.getRow() != selectedPiece.getRow()) & (clickedPiece.getCol() !=
+			if ((allowedMove) & ((clickedLocation[0] != selectedPiece.getRow()) & (clickedLocation[1] !=
 					selectedPiece.getCol()))){
 
 				// Remove the piece from the board
