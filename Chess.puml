@@ -1,0 +1,70 @@
+@startuml
+class Bishop{
++ Bishop()
++ canMoveTo()
++ getType()
+}
+class King{
++ King()
++ canMoveTo()
++ getType()
+}
+class Knight{
++ Knight()
++ canMoveTo()
++ getType()
+}
+class Pawn{
++ Pawn()
++ canMoveTo()
++ getType()
+}
+class Queen{
++ Queen()
++ canMoveTo()
++ getType()
+}
+class Rook{
++ Rook()
++ canMoveTo()
++ getType()
+}
+class ChessBoard{
++ BOARD_SIZE
+- chessPieces
++ ChessBoard()
++ addPiece()
++ pieceAt()
++ removePiece()
+}
+class Chess{
+~ display
+~ board
+~ chessTurn
+~ firstClick
+~ selectedPiece
++ init()
++ run()
++ startGame()
++ mousePressed()
+
+}
+enum PieceType{
+BISHOP
+KING
+KNIGHT
+PAWN
+QUEEN
+ROOK
+}
+
+ChessPiece <|-- Bishop
+ChessPiece <|-- King
+ChessPiece <|-- Knight
+ChessPiece <|-- Pawn
+ChessPiece <|-- Queen
+ChessPiece <|-- Rook
+GraphicsProgram <|-- Chess
+Chess o-- ChessBoard
+DrawableObject <|-- ChessBoard
+@enduml
