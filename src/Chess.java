@@ -37,21 +37,10 @@ public class Chess extends GraphicsProgram {
 	/** The main method that runs the program */
 	public void run()
 	{
-		// You fill this in.
-		//startGame(); // Arrange to match the starting configuration
-		custom();
+		startGame(); // Arrange to match the starting configuration
 		this.chessTurn = ChessPiece.WHITE; // Player white is the first player
 		this.firstClick = true;
 		display.draw(board);
-	}
-
-	private void custom(){
-		Bishop a = new Bishop(0, 1, ChessPiece.BLACK);
-		Bishop b = new Bishop(7, 1, ChessPiece.WHITE);
-		board.addPiece(a);
-		board.addPiece(b);
-		board.addPiece(new Queen(5,3, ChessPiece.WHITE));
-		board.addPiece(new Queen(5,0, ChessPiece.BLACK));
 	}
 
 	/** The method that arranges the piece to the starting positions*/

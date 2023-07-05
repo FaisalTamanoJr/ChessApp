@@ -28,70 +28,72 @@ public class Queen extends ChessPiece {
 			}
 		}
 
-
-		if (nextRow > row) {
-			for (int i = row+1; i < nextRow; i++) {
-				if (board.pieceAt(i, nextCol) != null) {
-					return false;
+		if ((nextRow == row) || (nextCol == col)){
+			if (nextRow > row) {
+				for (int i = row+1; i < nextRow; i++) {
+					if (board.pieceAt(i, nextCol) != null) {
+						return false;
+					}
 				}
 			}
-		}
-		else{
-			for (int i = row-1; i > nextRow; i--) {
-				if (board.pieceAt(i, nextCol) != null) {
-					return false;
+			else{
+				for (int i = row-1; i > nextRow; i--) {
+					if (board.pieceAt(i, nextCol) != null) {
+						return false;
+					}
 				}
 			}
-		}
-		if (nextCol > col) {
-			for (int i = col+1; i < nextCol; i++) {
-				if (board.pieceAt(nextRow, i) != null) {
-					return false;
+			if (nextCol > col) {
+				for (int i = col+1; i < nextCol; i++) {
+					if (board.pieceAt(nextRow, i) != null) {
+						return false;
+					}
 				}
 			}
-		}
-		else{
-			for (int i = col-1; i > nextCol; i--) {
-				if (board.pieceAt(nextRow, i) != null) {
-					return false;
+			else{
+				for (int i = col-1; i > nextCol; i--) {
+					if (board.pieceAt(nextRow, i) != null) {
+						return false;
+					}
 				}
 			}
-		}
-
-		if ((rowDif >= row) && (colDif >= col)){
-			int j = col+1;
-			for (int i = row+1; i < nextRow; i++){
-				if (board.pieceAt(i, j) != null) {
-					return false;
+			return true;
+		} else {
+			if ((rowDif >= row) && (colDif >= col)) {
+				int j = col + 1;
+				for (int i = row + 1; i < nextRow; i++) {
+					if (board.pieceAt(i, j) != null) {
+						return false;
+					}
+					j++;
 				}
-				j++;
-			}
-		} else if ((rowDif >= row) && (colDif <= col)){
-			int j = col-1;
-			for (int i = row+1; i < nextRow; i++){
-				if (board.pieceAt(i,j) != null) {
-					return false;
+			} else if ((rowDif >= row) && (colDif <= col)) {
+				int j = col - 1;
+				for (int i = row + 1; i < nextRow; i++) {
+					if (board.pieceAt(i, j) != null) {
+						return false;
+					}
+					j--;
 				}
-				j--;
-			}
-		} else if ((rowDif <= row) && (colDif >= col)){
-			int j = col+1;
-			for (int i = row-1; i > nextRow; i--){
-				if (board.pieceAt(i, j) != null) {
-					return false;
+			} else if ((rowDif <= row) && (colDif >= col)) {
+				int j = col + 1;
+				for (int i = row - 1; i > nextRow; i--) {
+					if (board.pieceAt(i, j) != null) {
+						return false;
+					}
+					j++;
 				}
-				j++;
-			}
-		} else if ((rowDif <= row) && (colDif <= col)){
-			int j = col-1;
-			for (int i = row-1; i > nextRow; i--){
-				if (board.pieceAt(i, j) != null) {
-					return false;
+			} else if ((rowDif <= row) && (colDif <= col)) {
+				int j = col - 1;
+				for (int i = row - 1; i > nextRow; i--) {
+					if (board.pieceAt(i, j) != null) {
+						return false;
+					}
+					j--;
 				}
-				j--;
+			} else {
+				return true;    // Eventually this line should not be here
 			}
-		}else{
-			return true;    // Eventually this line should not be here
 		}
 		return true;
 	}
